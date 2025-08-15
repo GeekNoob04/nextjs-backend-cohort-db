@@ -1,8 +1,6 @@
 import axios from "axios";
 async function fetchData() {
-    const res = await axios.get(
-        "https://week-13-offline.kirattechnologies.workers.dev/api/v1/user/details"
-    );
+    const res = await axios.get("http://localhost:3000/api/user");
     console.log("response hai", JSON.stringify(res.data));
     return res.data;
 }
@@ -11,11 +9,7 @@ export default async function User() {
     const data = await fetchData();
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className="flex justify-center">
-                {data.name}
-                <br />
-                {data.email}
-            </div>
+            <div className="flex justify-center">{data.name}</div>
         </div>
     );
 }
