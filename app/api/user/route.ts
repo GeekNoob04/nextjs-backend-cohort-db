@@ -1,5 +1,5 @@
 import { PrismaClient } from "@/app/generated/prisma";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 const client = new PrismaClient();
 export async function POST(req: NextRequest) {
     // extract the body
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
             password: body.password,
         },
     });
-    return Response.json({
+    return NextResponse.json({
         msg: "User created successfully",
     });
 }
