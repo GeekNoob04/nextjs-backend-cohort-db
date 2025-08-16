@@ -1,8 +1,7 @@
-import { PrismaClient } from "@/app/generated/prisma";
-const client = new PrismaClient();
+import { prisma } from "@/db";
 
 async function fetchData() {
-    const user = await client.user.findFirst();
+    const user = await prisma.user.findFirst();
     return {
         username: user?.username,
         name: "harshit",
