@@ -2,10 +2,11 @@ import { PrismaClient } from "@/app/generated/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 const client = new PrismaClient();
-export async function GET(req: NextRequest) {
+export async function GET() {
+    const user = await client.user.findFirst();
     return NextResponse.json({
-        name: "Harshit",
-        email: "harshitbudhraja0@gmail.com",
+        username: user?.username,
+        name: "harshit",
     });
 }
 export async function POST(req: NextRequest) {
@@ -18,14 +19,21 @@ export async function POST(req: NextRequest) {
     // body
     const body = await req.json();
     console.log(body);
-    await client.user.create({
-        data: {
-            username: body.email,
-            password: body.password,
-        },
-    });
+    try {
+        await client.user.create({
+            data: {
+                username: body.username,
+                password: body.password,
+            },
+        });
+        return NextResponse.json({
+            message: "User created successfully",
+        });
+    } catch (e) {
+        return NextResponse.json({
+            message: "Error creating user: " + e,
+        });
+    }
+
     // hitting the DB
-    return NextResponse.json({
-        message: "User created successfully",
-    });
 }
