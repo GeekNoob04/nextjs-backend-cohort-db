@@ -6,12 +6,14 @@ export async function GET(req: NextRequest) {
     });
 }
 export async function POST(req: NextRequest) {
-    // body
-    const body = await req.json();
+    /*
     // header
     const headers = req.headers.get("authorization");
     // query params
     const query = req.nextUrl.searchParams.get("name");
+    */
+    // body
+    const body = await req.json();
     // hitting the DB
     return NextResponse.json({
         message: "User created successfully",
