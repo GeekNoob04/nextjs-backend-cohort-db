@@ -1,6 +1,6 @@
 "use client";
 import { signup } from "@/app/actions/user";
-import axios from "axios";
+// import axios from "axios";
 // import { useRouter } from "next/navigation";
 import { ChangeEventHandler, useState } from "react";
 export function Signup() {
@@ -38,8 +38,12 @@ export function Signup() {
                                 placeholder="123456"
                             />
                             <button
-                                onClick={() => {
-                                    signup(username, password);
+                                onClick={async () => {
+                                    const res = await signup(
+                                        username,
+                                        password
+                                    );
+                                    console.log(res);
                                     // router.push("/");
                                 }}
                                 type="button"
